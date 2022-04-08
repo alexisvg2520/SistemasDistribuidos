@@ -2,13 +2,11 @@
 # Práctica 1 : Ejercicio 2
 # Tema: Sockets UDP
 import socket
-HOST='172.17.36.51'
 PORT=2113
 #socket
 with socket.socket(socket.AF_INET,socket.SOCK_DGRAM) as s: 
     print("Esperando conexion")
-    s.bind((HOST,PORT))
-    s.listen(5)
+    s.bind(('',PORT))
     conn,addr=s.accept()
     with conn:
         print(f"Conectado al cliente {addr}")
