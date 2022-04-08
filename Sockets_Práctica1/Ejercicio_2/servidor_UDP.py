@@ -1,6 +1,6 @@
 # Sistemas Distribuidos    Fecha: 07/04/2022 
 # Práctica 1 : Ejercicio 2
-# Tema: Sockets 
+# Tema: Sockets UDP
 import socket
 HOST='172.17.36.51'
 PORT=2113
