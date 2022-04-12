@@ -3,7 +3,7 @@
 #y btenido del siguiente sitio web https://recursospython.com/codigos-de-fuente/servidor-tcp-multi-hilo/
 
 from socket import socket
-# Conexion que se realiza para poder tener conexion con python3
+# Conexion que se realiza para poder tener conexion con python3 y se importa la libreria socket
 # el raw imput es una funcion mejorada para poder ingresar datos por consola
 try:
     raw_input
