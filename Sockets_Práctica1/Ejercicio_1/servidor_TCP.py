@@ -2,13 +2,15 @@
 # Práctica 1 : Ejercicio 1
 # Tema: Sockets 
 import socket
-HOST='172.17.36.51'
+HOST=''
 PORT=2113
 #socket
 with socket.socket(socket.AF_INET,socket.SOCK_STREAM) as s: 
     print("Esperando conexion")
     s.bind((HOST,PORT))
+    # Recibe la conexión hasta 5 intentos
     s.listen(5)
+    
     conn,addr=s.accept()
     with conn:
         print(f"Conectado al cliente {addr}")
