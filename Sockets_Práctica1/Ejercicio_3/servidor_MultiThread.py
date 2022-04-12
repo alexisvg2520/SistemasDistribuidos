@@ -12,26 +12,27 @@ class Client(Thread):
     def __init__(self, conn, addr):
         # Inicializar clase padre.
         Thread.__init__(self)
-        
+        # A través del contructor se establece la conexión y dirección respectiva
         self.conn = conn
         self.addr = addr
     
     def run(self):
         while True:
             try:
-                # Recibir datos del cliente.
+                # Recibe datos del cliente
                 input_data = self.conn.recv(1024)
             except error:
                 print("[%s] Error de lectura." % self.name)
                 break
             else:
-                # Reenviar la información recibida.
+                # Reenviar la información recibida del cliente
                 if input_data:
                     self.conn.send(input_data)
 def main():
+    # Definición del socket
     s = socket()
     
-    # Escuchar peticiones en el puerto 2113.
+    # Escucha las peticiones en el puerto 2113
     s.bind(('', 2113))
     s.listen(0)
     
@@ -40,7 +41,9 @@ def main():
         conn, addr = s.accept()
         c = Client(conn, addr)
         c.start()
+        # Se imprime la dirección IP del cliente y através del puerto al cual se conecta
         print("%s:%d se ha conectado." % addr)
 
 if __name__ == "__main__":
+    # Repite la función principal
     main()

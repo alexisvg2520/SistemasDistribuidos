@@ -3,9 +3,10 @@
 # Tema: Sockets UDP
 import socket
 PORT=2113
-#socket
+#socket - creamos el socket en el cual servirá para la comunicación
 with socket.socket(socket.AF_INET,socket.SOCK_DGRAM) as s: 
     print("Esperando conexion")
+    #Declaración del socket con su HOST y Puerto
     s.bind(('',PORT))
     conn,addr=s.accept()
     with conn:
@@ -16,5 +17,6 @@ with socket.socket(socket.AF_INET,socket.SOCK_DGRAM) as s:
             if not data:
                 break
             else:
+                #Imprime los datos recibidos del cliente
                 print('[*] Datos recibidos: {}'.format(data.decode('utf-8')))
             conn.sendall(data)
