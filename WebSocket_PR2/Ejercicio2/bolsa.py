@@ -18,6 +18,7 @@ class Bolsa(object):
             yield emp, round(random.uniform(5, 150), 2)
             time.sleep(random.random()/2.0)
 
+    #Definición de atributos remotos del Objeto BOlSA
     @property
     def name(self):
         return self._name
@@ -28,6 +29,7 @@ class Bolsa(object):
 
 
 if __name__ == "__main__":
+    #Creación de cada objeto bolsa con su nombre y elementos respectivos
     quito = Bolsa("UIO", ["La Favorita", "ROLAND", "FYBECA", "MARESA"])
     guayaquil = Bolsa("GYE", ["ADELCA", "NESTLE", "COCA-COLA", "EL ROSADO","LA UNIVERSAL"])
     
@@ -36,6 +38,7 @@ if __name__ == "__main__":
         quito_uri = daemon.register(quito)
         guayaquil_uri = daemon.register(guayaquil)
         with Pyro4.locateNS() as ns:
+            #Establecemos los nombres que van ligados al URI de cada objeto bolsa creado
             ns.register("ecu.bolsa.quito", quito_uri)
             ns.register("ecu.bolsa.guayaquil", guayaquil_uri)
         print("Bolsas en línea...")

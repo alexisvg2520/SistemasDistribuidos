@@ -1,36 +1,33 @@
 from __future__ import print_function
-from curses import keyname
-from glob import escape
-from re import T
 import Pyro4
+import keyboard
 
 class Cliente(object):
+    #Definición del constructor Cliente el cual entrará a la bolsa
     def __init__(self):
         self.bolsas = set()
         self.empresas = set()
 
+    #Construcción de la función que imprime los valores aleatorios de 
+    # cada empresa en la bolsa respectiva
     def start(self):
         print("Valor en el Mercado de las Empresas:\n", self.empresas)
         fuentes_mercado = {
             bolsa.name: bolsa.valor() for bolsa in self.bolsas
         }
-        while True:
-            a= input("Quiere seguir viendo? s/n")
-            if a=='n':
-                break
+        #Creación de un bucle infinito si no se presiona la tecla ESC sale de la ejecución
+        while not (keyboard.is_pressed('esc')):
             for bolsa, fuente_valor in fuentes_mercado.items():
                 valor = next(fuente_valor)  # obtiene un nuevo valor de la empresa de la bolsa
                 empresa, value = valor
                 if empresa in self.empresas:
                     print("{0}.{1}: {2}".format(bolsa, empresa, value))
                 
-                
 
-
-
+#Función que nos permitirá conectarnos a la bolsa de acuerdo a un nombre proporcionado
+#el cual ya se encuentra codificado la URI respectiva
 def conectar_bolsa():
-    # You can hardcode the stockmarket names for nasdaq and newyork, but it
-    # is more flexible if we just look for every available stockmarket.
+    #Creamos un array en el cual se guardarán las bolsas en línea
     bolsas = []
     with Pyro4.locateNS() as ns:
         for bolsa, bolsa_uri in ns.list(prefix="ecu.bolsa.").items():
@@ -40,47 +37,50 @@ def conectar_bolsa():
         raise ValueError("La bolsa no se encuentra en línea! \nEspere hasta que vuelva abrir la Bolsa!")
     return bolsas
 
+#Creación del Menú
 def menu():
-    
-	print("\n\nSelecciona una opción")
+	print("\nBOLSA DE VALORES\n\nSelecciona una opción")
 	print("\t1 - Bolsa por sus intereses")
 	print("\t2 - Bolsa de UIO")
 	print ("\t3 - Bolsa de GYE")
 	print ("\t4 - Salir\n")
 
 def main():
+    #Instanciamos el objeto cliente
     cliente = Cliente()
-    print("*****Bienvenido/a a la BOLSA DE VALORES******\n\n")
+    print("\n\n******Bienvenido/a al Programa de BOLSA DE VALORES******\n\n")
     cliente.bolsas = conectar_bolsa()
     while True:
         # Mostramos el menu
         menu()
-        # solicituamos una opción al usuario
+        # solicitamos una opción al usuario
         opcionMenu = input("Inserta la opción: ")
    
         if opcionMenu=="1":
-
             print ("")
-            input("Ha pulsado la opción 1...\nPulse una tecla para continuar\n")
-            cliente.empresas = {"ADELCA", "NESTLE", "COCA-COLA", "La Favorita", "ROLAND"}
+            input("Ha pulsado la opción 1...\n\n****Para salir de la ejecución presione ESC***\n\nPulse una tecla para continuar\n")
+            #Instanciamos las empresas a ver dentro de la bolsa - preferencia
+            cliente.empresas = {"ADELCA", "NESTLE", "La Favorita", "ROLAND"}
             cliente.start()
+        
         elif opcionMenu=="2":
             print ("")
-            input("Has pulsado la opción 2...\npulsa una tecla para continuar")
+            input("Ha pulsado la opción 2...\n\n****Para salir de la ejecución presione ESC***\n\nPulse una tecla para continuar\n")
+            #Instanciamos las empresas a ver dentro de la bolsa - UIO
             cliente.empresas = {"La Favorita", "ROLAND", "FYBECA", "MARESA"}
             cliente.start()
 
         elif opcionMenu=="3":
             print ("")
-            input("Has pulsado la opción 3...\npulsa una tecla para continuar")
+            input("Ha pulsado la opción 3...\n\n****Para salir de la ejecución presione ESC***\n\nPulse una tecla para continuar\n")
+            #Instanciamos las empresas a ver dentro de la bolsa - GYE
             cliente.empresas = {"ADELCA", "NESTLE", "COCA-COLA", "EL ROSADO","LA UNIVERSAL"}
             cliente.start()
-
+        
         elif opcionMenu=="4":
             break
-
+        
         else:
-
             print ("")
             input("No has pulsado ninguna opción correcta...\npulsa una tecla para continuar")
 
