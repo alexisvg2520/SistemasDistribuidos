@@ -58,21 +58,21 @@ def main():
    
         if opcionMenu=="1":
             print ("")
-            input("Ha pulsado la opción 1...\n\n****Para salir de la ejecución presione ESC***\n\nPulse una tecla para continuar\n")
+            input("Ha pulsado la opción 1...\n\n****Para salir de la ejecución presione ESC repetidamente***\n\nPulse una tecla para continuar\n")
             #Instanciamos las empresas a ver dentro de la bolsa - preferencia
             cliente.empresas = {"ADELCA", "NESTLE", "La Favorita", "ROLAND"}
             cliente.start()
         
         elif opcionMenu=="2":
             print ("")
-            input("Ha pulsado la opción 2...\n\n****Para salir de la ejecución presione ESC***\n\nPulse una tecla para continuar\n")
+            input("Ha pulsado la opción 2...\n\n****Para salir de la ejecución presione ESC repetidamente***\n\nPulse una tecla para continuar\n")
             #Instanciamos las empresas a ver dentro de la bolsa - UIO
             cliente.empresas = {"La Favorita", "ROLAND", "FYBECA", "MARESA"}
             cliente.start()
 
         elif opcionMenu=="3":
             print ("")
-            input("Ha pulsado la opción 3...\n\n****Para salir de la ejecución presione ESC***\n\nPulse una tecla para continuar\n")
+            input("Ha pulsado la opción 3...\n\n****Para salir de la ejecución presione ESC repetidamente***\n\nPulse una tecla para continuar\n")
             #Instanciamos las empresas a ver dentro de la bolsa - GYE
             cliente.empresas = {"ADELCA", "NESTLE", "COCA-COLA", "EL ROSADO","LA UNIVERSAL"}
             cliente.start()
