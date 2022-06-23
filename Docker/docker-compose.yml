@@ -1,0 +1,39 @@
+version: "3.1"
+services:
+  web:
+    build: ./
+    image: wordpresscm:v1
+    container_name: wpcont
+    ports:
+      - "8082:80"
+    environment:
+      - MYSQL_USERNAME=grupo1
+      - MYSQL_PASSWORD=1234
+      - MYSQL_DATABASE=wpdb
+      - MYSQL_HOST=mysql
+    hostname: phpweb
+    volumes:
+      - ./html:/var/www/html
+    depends_on:
+      - mysql
+    links:
+      - mysql
+    restart: on-failure
+    stdin_open: true
+    tty: true    
+        
+  mysql:
+    build: ./mysqldocker
+    image: mariadbcm:v1
+    container_name: mariawpdb
+    hostname: mariawpdb
+    ports:
+      - "33065:3306"
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=taller1
+      - MYSQL_USER=grupo1
+      - MYSQL_PASSWORD=1234
+      - MYSQL_DATABASE=wpdb
+    volumes:
+      - ./mysql:/var/lib/mysql
